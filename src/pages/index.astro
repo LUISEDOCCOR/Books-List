@@ -1,0 +1,45 @@
+    ---
+    import Layout from "../Layouts/Layout.astro";
+    import TopScreen from "../components/TopScreen.astro"
+    import { getBooks } from "../functions/Books"
+    import PreviewBook from "../components/PreviewBook.astro";
+    const {library : Books} = await getBooks()
+    ---
+
+    <Layout>
+        <section class="bg-white h-[90vh] w-[60vw] rounded-xl shadow-sm overflow-hidden">
+            <TopScreen/>
+            <article class="p-4 border-b-2 border-black">
+                <header>
+                    <h1 class="text-4xl font-semibold">Books Store</h1>
+                </header>
+            </article>
+            <article class="p-4 border-b-2 border-black">
+                <form class="flex items-center justify-between">
+                    <input 
+                        class="h-12 outline-none w-96 text-2xl" 
+                        type="text"
+                        placeholder="Enter a title"
+                    >
+                    <input 
+                        class="text-xl border-2 border-black px-8 py-1 hover:text-white 
+                        hover:bg-black transition-colors cursor-pointer" 
+                        type="submit" 
+                        value="Search"
+                    >
+                </form>
+            </article>
+            <article class="flex justify-center items-center gap-6 flex-wrap mt-12 overflow-y-auto h-3/4">
+                {
+                    Books.map(({book}) => (
+                        <PreviewBook
+                            title={book.title}
+                            cover={book.cover}
+                            author={book.author.name}
+                            isbn = {book.isbn}
+                        />
+                    ))
+                }
+            </article>
+        </section>
+    </Layout>   

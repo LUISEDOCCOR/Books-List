@@ -1,0 +1,32 @@
+---
+const {title, cover, author, isbn} = Astro.props
+---
+<script defer>
+    document.getElementById("button").addEventListener("click", (e) => {
+    console.log(e.target.id)
+    })
+</script>
+<section class="border border-black w-[15vw] flex flex-col p-8 justify-center items-center gap-12">
+    <article>
+        <section class="overflow-hidden">
+            <img 
+                class="h-96 w-64 object-cover object-center shadow-lg" 
+                src={cover} 
+                alt={title} 
+                title={title}
+            >
+        </section>
+    </article>
+    <article class="w-full space-y-3">
+        <section class="flex justify-between items-center">
+            <h3 class="text-2xl font-semibold text-nowrap">{title.length > 25 ? title.slice(0, 25) + "..." : title }</h3>
+        </section>
+        <section class="flex justify-between items-center">
+            <h4>{author}</h4>
+            <button id="button" class="text-xl border-2 border-black px-2 py-.5 hover:text-white 
+            hover:bg-black transition-colors cursor-pointer" id={isbn}>
+                Add
+            </button>
+        </section>
+    </article>
+</section>
